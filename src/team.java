@@ -20,6 +20,19 @@ public class team {
     }
 
     public static boolean playerExist(){
-        if ()
+        return false;
     }
+
+    public static void addPlayer() {
+        
+    }
+
+    public static void removePlayer(){
+        
+    }
+    @Override
+    public String toString(){
+        return "";
+    } 
+
 }
