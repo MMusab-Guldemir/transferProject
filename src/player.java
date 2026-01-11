@@ -1,82 +1,105 @@
 package src;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
-public class player {
-    
-    String name;
-    int age;
-    String nationality;
-    int jerseyNumber;
-    String position;
-    int marketValue;
+public class Player { 
+    private String name;
+    private int age;
+    private String nationality;
+    private int jerseyNumber;
+    private String position;
+    private int marketValue;
 
-    public player(String name, int age, String nationality, int jerseyNumber, String position, int marketValue) {
+    public Player(String name, int age, String nationality, int jerseyNumber, String position, int marketValue) {
         this.name = name;
         this.age = age;
         this.nationality = nationality;
         this.jerseyNumber = jerseyNumber;
         this.position = position;
         this.marketValue = marketValue;
-
-        /* Yz
-        setAge(age);
-        setJerseyNumber(jerseyNumber);
-        setPosition(position);
-        setMarketValue(marketValue);       
-        */
     }
 
-    public void setName(String name){
+    // Getter metodları
+    public String getName() {
+        return name;
+    }
+    
+    public String getNationality() {
+        return nationality;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    public int getJerseyNumber() {
+        return jerseyNumber;
+    }
+    
+    public String getPosition() {
+        return position;
+    }
+    
+    public int getMarketValue() {
+        return marketValue;
+    }
+    
+    // Setter metodları
+    public void setName(String name) {
         this.name = name;
     }
 
     public void setAge(int age) {
-        if (age > 0){
+        if (age > 0) {
             this.age = age;
-        }
-        else
-        {
+        } else {
             throw new IllegalArgumentException("Invalid age. Age must be positive.");
         }
     }
 
     public void setJerseyNumber(int jerseyNumber) {
-        if (jerseyNumber >= 1 && jerseyNumber <= 99){
+        if (jerseyNumber >= 1 && jerseyNumber <= 99) {
             this.jerseyNumber = jerseyNumber;
-        }
-        else
-        {
+        } else {
             throw new IllegalArgumentException("Invalid jersey number. It must be between 1 and 99.");
         }
     }
 
-    public void setPosition(String position){
+    public void setPosition(String position) {
         List<String> validPositions = Arrays.asList("Goalkeeper", "Defender", "Midfielder", "Forward");
-
-        if (validPositions.contains(position)){
+        
+        if (validPositions.contains(position)) {
             this.position = position;
-        }
-        else
-        {
+        } else {
             throw new IllegalArgumentException("Invalid position. Valid positions are: " + validPositions);
         }
     }
     
-    public void setMarketValue(int marketValue){
-        if (marketValue > 0){
+    public void setMarketValue(int marketValue) {
+        if (marketValue > 0) {
             this.marketValue = marketValue;
-        }
-        else
-        {
+        } else {
             throw new IllegalArgumentException("Invalid market value. It must be positive.");
         }
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Player player = (Player) obj;
+        return jerseyNumber == player.jerseyNumber && 
+               name.equals(player.name);
+    }
+    
+    @Override
+    public int hashCode() {
+        return 31 * name.hashCode() + jerseyNumber;
     }
 
     @Override
     public String toString() {
-        return "New Player -> "  + name + "  " + age + "  " + nationality + "  " + jerseyNumber + "  " + position + "  " + marketValue + " $";
+        return name + " (" + nationality + ") - " + position + " - No: " + jerseyNumber + " - Value: " + marketValue + "$";
     }
 }
