@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Team { 
-    private int id; // yeni alan
+    private int id; 
     private String teamName;
     private String country;
     private List<Player> players;
