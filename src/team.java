@@ -114,4 +114,14 @@ public class Team {
     public static int getTeamId(Team team) {
         return team.id;
     }
+
+    public boolean removePlayer(int jerseyNumber) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removePlayer'");
+    }
+
+    public void updatePoints(int awayGoals, int homeGoals) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updatePoints'");
+    }
 }

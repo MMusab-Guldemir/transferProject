@@ -259,4 +259,9 @@ public class Group {
     private int getLosses(int teamIndex) {
         return getGamesPlayed(teamIndex) - getWins(teamIndex) - getDraws(teamIndex);
     }
+
+    public Team[] getTeams() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTeams'");
+    }
 }

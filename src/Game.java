@@ -9,7 +9,7 @@ public class Game {
     public Game(Team team1, Team team2, Integer team1Goals, Integer team2Goals){
         this.teams.add(team1);
         this.teams.add(team2);
-        this.goals.add(team1Goals);
+         this.goals.add(team1Goals);
         this.goals.add(team2Goals);
     }
 
