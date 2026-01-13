@@ -19,6 +19,16 @@ public class Player {
         this.position = position;
         this.marketValue = marketValue;
     }
+    
+    // Alternatif constructor (Main'de kullanmak için)
+    public Player(int id, String name, String surname, int jerseyNumber, String position) {
+        this.name = name + " " + surname;
+        this.age = 25; // varsayılan yaş
+        this.nationality = "Unknown"; // varsayılan milliyet
+        this.jerseyNumber = jerseyNumber;
+        this.position = position;
+        this.marketValue = 1000000; // varsayılan piyasa değeri
+    }
 
     // Getter metodları
     public String getName() {
@@ -100,6 +110,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return name + " (" + nationality + ") - " + position + " - No: " + jerseyNumber + " - Value: " + marketValue + "$";
+        return String.format("%-25s %-15s No: %-2d Pos: %-12s Value: %d$", 
+            name, nationality, jerseyNumber, position, marketValue);
     }
 }
