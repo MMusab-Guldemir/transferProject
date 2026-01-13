@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Team { 
-    private int id; 
+    int id; 
     private String teamName;
     private String country;
     private List<Player> players;
@@ -109,5 +109,9 @@ public class Team {
     
     public boolean isTeamFull() {
         return players.size() >= maxPlayers;
+    }
+
+    public static int getTeamId(Team team) {
+        return team.id;
     }
 }
