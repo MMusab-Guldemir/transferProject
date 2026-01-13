@@ -3,6 +3,21 @@ package src;
 public class Main {
     public static void main(String[] args) {
         // // Türk takımı oluştur
+        Team turkishTeam = new Team(34, "Türkiye");
+        Team germanTeam = new Team(6, "Germany");
+        Team englandTeam = new Team(44, "England");
+
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("Welcome to Qatar 2022! Get Ready for the World Cup!");
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("--------------------------- Group: A ---------------------------");
+        System.out.println("1 - Create a new Team");
+        System.out.println("2 - Display a Team ");
+        System.out.println("3 - Add Player to a Team");
+        
+
+
+
         // Team turkishTeam = new Team("Turkish National Team", "Türkiye", 23);
         
         // // Oyuncular oluştur
@@ -55,33 +70,33 @@ public class Main {
 
 
 
-        // 4 takımlı bir grup oluştur
-        Group groupA = new Group("A", 4);
+        // // 4 takımlı bir grup oluştur
+        // Group groupA = new Group("A", 4);
         
-        // Takımları oluştur
-        Team team1 = new Team(1, "Germany");
-        Team team2 = new Team(2, "France");
-        Team team3 = new Team(3, "Portugal");
-        Team team4 = new Team(4, "Hungary");
+        // // Takımları oluştur
+        // Team team1 = new Team(1, "Germany");
+        // Team team2 = new Team(2, "France");
+        // Team team3 = new Team(3, "Portugal");
+        // Team team4 = new Team(4, "Hungary");
         
-        // Takımları gruba ekle
-        groupA.addTeam(team1);
-        groupA.addTeam(team2);
-        groupA.addTeam(team3);
-        groupA.addTeam(team4);
+        // // Takımları gruba ekle
+        // groupA.addTeam(team1);
+        // groupA.addTeam(team2);
+        // groupA.addTeam(team3);
+        // groupA.addTeam(team4);
         
-        // Maçları oluştur
-        Game game1 = new Game(team1, team2, 2, 1);  // Germany 2-1 France
-        Game game2 = new Game(team3, team4, 0, 0);  // Portugal 0-0 Hungary
-        Game game3 = new Game(team1, team3, 1, 1);  // Germany 1-1 Portugal
+        // // Maçları oluştur
+        // Game game1 = new Game(team1, team2, 2, 1);  // Germany 2-1 France
+        // Game game2 = new Game(team3, team4, 0, 0);  // Portugal 0-0 Hungary
+        // Game game3 = new Game(team1, team3, 1, 1);  // Germany 1-1 Portugal
         
-        // Maçları gruba ekle
-        groupA.addGame(game1);
-        groupA.addGame(game2);
-        groupA.addGame(game3);
+        // // Maçları gruba ekle
+        // groupA.addGame(game1);
+        // groupA.addGame(game2);
+        // groupA.addGame(game3);
         
-        // Grup durumunu göster
-        System.out.println(groupA.toString());
+        // // Grup durumunu göster
+        // System.out.println(groupA.toString());
 
 
     }
