@@ -41,17 +41,48 @@ public class Main {
         // System.out.println(turkishTeam.getUsedJerseyNumbers());
 
 
-        Team germany = new Team(6, "Germany");
-        Team turkiye = new Team(38, "Türkiye");
+        // Team germany = new Team(6, "Germany");
+        // Team turkiye = new Team(38, "Türkiye");
         
-        Game g1 = new Game(turkiye, germany, 2, 1);
+        // Game g1 = new Game(turkiye, germany, 2, 1);
         
-        System.out.println("Match Result: " + g1.toString());
-        System.out.println();
+        // System.out.println("Match Result: " + g1.toString());
+        // System.out.println();
         
-        System.out.println("Points calculation:");
-        g1.getTeamPoints(turkiye);
-        g1.getTeamPoints(germany);
+        // System.out.println("Points calculation:");
+        // g1.getTeamPoints(turkiye);
+        // g1.getTeamPoints(germany);
+
+
+
+        // 4 takımlı bir grup oluştur
+        Group groupA = new Group("A", 4);
+        
+        // Takımları oluştur
+        Team team1 = new Team(1, "Germany");
+        Team team2 = new Team(2, "France");
+        Team team3 = new Team(3, "Portugal");
+        Team team4 = new Team(4, "Hungary");
+        
+        // Takımları gruba ekle
+        groupA.addTeam(team1);
+        groupA.addTeam(team2);
+        groupA.addTeam(team3);
+        groupA.addTeam(team4);
+        
+        // Maçları oluştur
+        Game game1 = new Game(team1, team2, 2, 1);  // Germany 2-1 France
+        Game game2 = new Game(team3, team4, 0, 0);  // Portugal 0-0 Hungary
+        Game game3 = new Game(team1, team3, 1, 1);  // Germany 1-1 Portugal
+        
+        // Maçları gruba ekle
+        groupA.addGame(game1);
+        groupA.addGame(game2);
+        groupA.addGame(game3);
+        
+        // Grup durumunu göster
+        System.out.println(groupA.toString());
+
 
     }
 }

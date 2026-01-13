@@ -1,10 +1,6 @@
 package src;
 
-import java.lang.classfile.TypeAnnotation.SupertypeTarget;
-import java.lang.foreign.GroupLayout;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.TreeMap;
+
 
 public class Group {
     
@@ -90,8 +86,8 @@ public class Group {
         Team team1 = gameTeams.get(0);
         Team team2 = gameTeams.get(1);
 
-        int index1 = findTeamIndex(team1);
-        int index2 = findTeamIndex(team2);
+        int index1 = findTeamIndexById(team1.getId());
+        int index2 = findTeamIndexById(team2.getId());
 
         if (index1 == -1 || index2 == -1) {
             System.out.println("Cannot add game: One or both teams are not in the group " + name );
@@ -144,7 +140,123 @@ public class Group {
 
     }
 
-
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n=== Group ").append(name).append(" Standings ===\n");
+        sb.append("Group Size: ").append(groupSize).append("\n");
+        sb.append("Current Teams: ").append(numberOfTeams).append("/").append(groupSize).append("\n");
+        
+        if (numberOfTeams == 0) {
+            sb.append("No teams in the group yet.\n");
+            return sb.toString();
+        }
+        
+        // Tablo başlığı
+        sb.append("\nTeam Standings (sorted by points):\n");
+        sb.append(String.format("%-5s %-20s %-8s %-6s %-6s %-6s\n", 
+                "Pos", "Team", "Played", "W", "D", "L", "Pts"));
+        sb.append("------------------------------------------------------------\n");
+        
+        // Takımları ve istatistiklerini sırala (kabarcık sıralama)
+        for (int i = 0; i < numberOfTeams - 1; i++) {
+            for (int j = i + 1; j < numberOfTeams; j++) {
+                if (points[j] > points[i]) {
+                    // Takım ve puanları değiştir
+                    Team tempTeam = teams[i];
+                    teams[i] = teams[j];
+                    teams[j] = tempTeam;
+                    
+                    int tempPoints = points[i];
+                    points[i] = points[j];
+                    points[j] = tempPoints;
+                }
+            }
+        }
+        
+        // Her takım için istatistikleri göster
+        for (int i = 0; i < numberOfTeams; i++) {
+            int played = getGamesPlayed(i);
+            int wins = getWins(i);
+            int draws = getDraws(i);
+            int losses = getLosses(i);
+            
+            sb.append(String.format("%-5d %-20s %-8d %-6d %-6d %-6d %-6d\n",
+                    i + 1, 
+                    teams[i].getTeamName(), 
+                    played, 
+                    wins, 
+                    draws, 
+                    losses, 
+                    points[i]));
+        }
+        
+        // Oynanan maçları listele
+        sb.append("\nPlayed Games:\n");
+        boolean hasGames = false;
+        for (int i = 0; i < numberOfTeams; i++) {
+            for (int j = i + 1; j < numberOfTeams; j++) {
+                if (games[i][j] != null) {
+                    sb.append("- ").append(games[i][j].toString()).append("\n");
+                    hasGames = true;
+                }
+            }
+        }
+        
+        if (!hasGames) {
+            sb.append("No games played yet.\n");
+        }
+        
+        return sb.toString();
+    }
     
+    // Yardımcı metodlar: Takım istatistiklerini hesapla
+    private int getGamesPlayed(int teamIndex) {
+        int count = 0;
+        for (int j = 0; j < numberOfTeams; j++) {
+            if (games[teamIndex][j] != null) {
+                count++;
+            }
+        }
+        return count;
+    }
     
+    private int getWins(int teamIndex) {
+        int wins = 0;
+        for (int j = 0; j < numberOfTeams; j++) {
+            if (games[teamIndex][j] != null) {
+                Game game = games[teamIndex][j];
+                java.util.List<Team> gameTeams = game.getTeams();
+                java.util.List<Integer> goals = game.getGoals();
+                
+                if (gameTeams.get(0).equals(teams[teamIndex])) {
+                    // Takım ilk takım olarak oynamış
+                    if (goals.get(0) > goals.get(1)) wins++;
+                } else {
+                    // Takım ikinci takım olarak oynamış
+                    if (goals.get(1) > goals.get(0)) wins++;
+                }
+            }
+        }
+        return wins;
+    }
+    
+    private int getDraws(int teamIndex) {
+        int draws = 0;
+        for (int j = 0; j < numberOfTeams; j++) {
+            if (games[teamIndex][j] != null) {
+                Game game = games[teamIndex][j];
+                java.util.List<Integer> goals = game.getGoals();
+                
+                if (goals.get(0).equals(goals.get(1))) {
+                    draws++;
+                }
+            }
+        }
+        return draws;
+    }
+    
+    private int getLosses(int teamIndex) {
+        return getGamesPlayed(teamIndex) - getWins(teamIndex) - getDraws(teamIndex);
+    }
 }
